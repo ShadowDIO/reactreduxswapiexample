@@ -1,5 +1,5 @@
 import React from 'react';
-import FilteredResults from './FilteredResults';
+
 import ResultsDetail from './ResultsDetail';
 
 import { connect } from 'react-redux';
@@ -9,12 +9,9 @@ class Results extends React.Component {
 
     render() {
         return (
-            <div className="ui grid">
+            <div className="ui segment">
 				<h4>Results</h4>
-                <div className="six wide column">
-                    <FilteredResults />
-                </div>
-                <div className="six wide column">
+                <div>
                     <ResultsDetail/>
                 </div>
 			</div>

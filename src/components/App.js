@@ -1,57 +1,25 @@
 import React from 'react';
-import FilterButton from './FilterButton';
-import SearchBox from './SearchBox';
-import ResultsBox from './Results';
 
-import { selectCategory } from '../actions';
+import CategorySelectionPage from '../pages/CategorySelectionPage';
+import FilteringPage from '../pages/FilteringPage';
+import ResultsPage from '../pages/ResultsPage';
 
-import { connect } from 'react-redux';
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 
-const App = (props) => {
+
+const App = () => {
     return (
         <div className="ui container">
             <h1 className="ui center aligned header">
                 STAR WARS
             </h1>
-            <div className="ui segment">
-                <div className="ui grid">
-                    <div className="five wide column">
-                        <FilterButton text="PLANETS" value="planets" onClick={props.selectCategory}/>
-                    </div>
-                    <div className="five wide column">
-                        <FilterButton text="STARSHIPS" value="starships" onClick={props.selectCategory}/>
-                    </div>
-                    <div className="five wide column">
-                        <FilterButton text="VEHICLES" value="vehicles" onClick={props.selectCategory}/>
-                    </div>
-                    <div className="five wide column">
-                        <FilterButton text="PEOPLE" value="people" onClick={props.selectCategory}/>
-                    </div>
-                    <div className="five wide column">
-                        <FilterButton text="FILMS" value="films" onClick={props.selectCategory}/>
-                    </div>
-                    <div className="five wide column">
-                        <FilterButton text="SPECIES" value="species" onClick={props.selectCategory}/>
-                    </div>
-                </div>
-            </div>
-            <div className="ui segment">
-                <div>
-                    <SearchBox />
-                </div>
-            </div>
-            <div className="ui segment">
-                <ResultsBox />
-            </div>
+            <BrowserRouter>
+                <NavLink to="/">Home</NavLink>
+                <Route path="/" exact component={CategorySelectionPage} />
+                <Route path="/filteringPage" exact component={FilteringPage} />
+                <Route path="/resultsPage" exact component={ResultsPage} />
+            </BrowserRouter>
         </div>);
 }
 
-const mapStateToProps = (state) => {
-    console.log(state);
-    return (
-        {
-            filteredResults: state.filterSubCategory
-        });
-}
-
-export default connect(mapStateToProps, { selectCategory })(App);
+export default App;

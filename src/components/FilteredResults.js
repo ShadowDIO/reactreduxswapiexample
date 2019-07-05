@@ -1,7 +1,7 @@
 import React from 'react';
 import FilterButton from './FilterButton';
 
-import { selectCategory, selectSubcategory } from '../actions';
+import { selectSubcategory } from '../actions';
 
 import { connect } from 'react-redux';
 
@@ -23,10 +23,11 @@ class FilteredResults extends React.Component {
             return (
                 <FilterButton
                     text={cat.name ? cat.name : cat.title}
-                    Key={cat.url}
-                    className="ui ten wide column"
+                    key={cat.url}
+                    className="ui four wide column"
                     onClick={this.props.selectSubcategory}
                     value={cat.url}
+                    redirectTo="resultsPage"
                 />
                 )
         });
@@ -43,4 +44,4 @@ const mapStateToProps = (state) => {
         });
 }
 
-export default connect(mapStateToProps, { selectCategory, selectSubcategory})(FilteredResults);
+export default connect(mapStateToProps, { selectSubcategory })(FilteredResults);

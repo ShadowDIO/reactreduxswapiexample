@@ -1,25 +1,35 @@
 import SWAPI from '../apis/SWAPI';
 
-export const selectCategory = (category = '') => {
+export const selectCategory = (category = '', searchTerm ='') => {
     console.log('selectCategory Action Hit!', category);
 
     return async (dispatch) => { 
 
-    var response = [];
+        if (category) {
 
-    if (category) {
-        response = await SWAPI.get(`/${category}`);
+            var urlPath = `/${category}`;
 
-        if (!response)
-            response = [];
+            if (searchTerm)
+                urlPath = `/${category}/?search=${searchTerm}`;
+
+            console.log("Url Path", urlPath);
+
+            var response = await SWAPI.get(urlPath);
+
+            var results = [];
+
+            if (response)
+                results = response.data.results;
         }
 
-        dispatch({
-            type: 'CATEGORY_SELECTED',
-            payload: {
-                category: category,
-                filteredSubCategories: response.data.results
-            }
+        console.log(response);
+
+            dispatch({
+                type: 'CATEGORY_SELECTED',
+                payload: {
+                    category: category,
+                    filteredSubCategories: results
+                }
         });
     };
 }

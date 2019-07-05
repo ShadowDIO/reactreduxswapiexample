@@ -9,9 +9,9 @@ class ResultsDetail extends React.Component {
     render() {
         console.log("Render", this.props.filteredResults);
         return (
-            <div class="ui raised segment">
-                <pre>
-                    {JSON.stringify(this.props.filteredResults)}
+            <div className="ui raised segment">
+               <pre>
+                {JSON.stringify(this.props.filteredResults,null,1)}
                 </pre>
 			</div>
         );
