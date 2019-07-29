@@ -3,7 +3,12 @@ import React from 'react';
 import SearchBox from '../components/SearchBox';
 import FilteredResults from '../components/FilteredResults';
 
-const FilteringPage = () => {
+import CategoryContext from '../contexts/CategoryContext';
+
+import { connect } from 'react-redux';
+
+const FilteringPage = (props) => {
+
     return (
         <div className="ui segment">
             <div>
@@ -11,10 +16,20 @@ const FilteringPage = () => {
             </div>
             <div className="ui horizontal divider" />
             <div>
-                <FilteredResults />
+                <CategoryContext.Provider value={props.selectedCategoryValue}>
+                    <FilteredResults />
+                </CategoryContext.Provider>
             </div>
         </div>
     );
 }
 
-export default FilteringPage;
+const mapStateToProps = (state) => {
+    
+    return (
+        {
+            selectedCategoryValue: state.categorySelected.category.charAt(0).toUpperCase() + state.categorySelected.category.slice(1)
+        });
+}
+
+export default connect(mapStateToProps)(FilteringPage);

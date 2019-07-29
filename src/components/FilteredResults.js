@@ -1,17 +1,24 @@
 import React from 'react';
 import FilterButton from './FilterButton';
 
+import CategoryContext from '../contexts/CategoryContext';
+
 import { selectSubcategory } from '../actions';
 
 import { connect } from 'react-redux';
 
 class FilteredResults extends React.Component {
 
+    static contextType = CategoryContext;
+
     render() {
         return (
-            <div className="ui grid">
-                { this.renderList() }
-			</div>
+            <div>
+                <h3>{this.context}</h3>
+                <div className="ui grid">
+                  {this.renderList()}
+                </div>
+            </div>
 			);
     }
 

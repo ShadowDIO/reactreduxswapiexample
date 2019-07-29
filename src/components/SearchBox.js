@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { selectCategory } from '../actions';
 
 import { connect } from 'react-redux';
 
 
-class SearchBox extends React.Component {
+const SearchBox = (props) => {
 
-    inputValue = '';
+    const [value, setValue] = useState('');
 
-    render() {
-        return (
-            <div className="ui fluid icon input">
-                <input type="text" placeholder="Search..." onChange={(e) => { this.inputValue = e.target.value; }} />
-                <div className="ui button" onClick={() => { console.log('Search Clicked', this.inputValue); this.props.selectCategory(this.props.SelectedCategory, this.inputValue) }}>Search</div>
-            </div>
-            );
+    const onFormSubmit = (event) => {
+        event.preventDefault();
+
+        props.selectCategory(props.SelectedCategory, value)
     }
+
+    return (
+        <form onSubmit={onFormSubmit}>
+            <div className="ui fluid icon input">
+                <input type="text" placeholder="Search..." value={value} onChange={(e) => { setValue(e.target.value); }} />
+                <button className="ui button" onClick={() => { console.log('Search Clicked', value); }}>Search</button>
+            </div>
+        </form>
+        );
+    
 }
 
 const mapStateToProps = (state) => {

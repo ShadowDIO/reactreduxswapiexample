@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const categorySelectedReducer = (state = [], action) => {
+const categorySelectedReducer = (state = { category: '' }, action) => {
     if (action.type === 'CATEGORY_SELECTED') {
         return action.payload;
     }
@@ -8,7 +8,7 @@ const categorySelectedReducer = (state = [], action) => {
     return state;
 }
 
-const subCategorySelectedReducer = (state = [], action) => {
+const subCategorySelectedReducer = (state = {}, action) => {
     if (action.type === 'SUBCATEGORY_SELECTED') {
         return action.payload;
     }
